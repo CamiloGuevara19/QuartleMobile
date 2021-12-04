@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "147245827450",
+    "firebase_url": "https://quartle-default-rtdb.firebaseio.com",
+    "project_id": "quartle",
+    "storage_bucket": "quartle.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:147245827450:android:d93be167a0f9cde20182c3",
+        "android_client_info": {
+          "package_name": "com.example.quartlemobile2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "147245827450-67hi5iq2cfcl3fdtt35pk9n4doen79md.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfbgqusTlMeu1f1YXTWbl6ye5wNReBDUA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "147245827450-67hi5iq2cfcl3fdtt35pk9n4doen79md.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
