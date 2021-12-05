@@ -119,8 +119,6 @@ public class Scanner extends AppCompatActivity implements View.OnClickListener {
         Log.e("2:", refArray[2]);
 
         //Toast.makeText(this, " " + refArray[0] + refArray[1] + refArray[2], Toast.LENGTH_SHORT).show();
-
-        DatabaseReference setterRef = db.getReference().child(id).child("eventsAttended");
         DatabaseReference ref = db.getReference().child(refArray[0]).child(refArray[1]).child(refArray[2]);
         ref.addListenerForSingleValueEvent(
                 new ValueEventListener() {
@@ -128,8 +126,14 @@ public class Scanner extends AppCompatActivity implements View.OnClickListener {
                     @Override
                     public void onDataChange( DataSnapshot data) {
                         event = data.getValue(Event.class);
-                        //newAttendance = Integer.parseInt(event.getAttendants());
+                        newAttendance = Integer.parseInt(event.getAttendants());
                         Log.e("a", event.getAttendants());
+
+                        newAttendance++;
+                        event.setAttendants("" + newAttendance);
+                        DatabaseReference setterRef = db.getReference().child(id).child("eventsAttended").child(event.getName());
+                        setterRef.setValue(event);
+                        ref.setValue(event);
                     }
                     @Override
                     public void onCancelled( DatabaseError error) {
@@ -137,10 +141,6 @@ public class Scanner extends AppCompatActivity implements View.OnClickListener {
                     }
                 });
 
-        //newAttendance++;
-        //event.setAttendants("" + newAttendance);
-        //setterRef.setValue(event);
-        //ref.setValue(event);
 
     }
 }

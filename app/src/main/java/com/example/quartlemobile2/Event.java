@@ -1,5 +1,7 @@
 package com.example.quartlemobile2;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 public class Event {
@@ -19,15 +21,16 @@ public class Event {
 
     public Event(String attendants, String capacity, String date, String goals,
                  String location, String name, String points, String purpose, String user) {
-        this.attendants = attendants;
-        this.capacity = capacity;
-        this.date = date;
-        this.goals = goals;
-        this.location = location;
-        this.name = name;
-        this.points = points;
-        this.purpose = purpose;
-        this.user = user;
+            this.attendants = attendants;
+            this.capacity = "" + capacity;
+            this.date = date;
+            this.goals = goals;
+            this.location = location;
+            this.name = name;
+            this.points = "" + points;
+            this.purpose = purpose;
+            this.user = user;
+
     }
 
     public String getAttendants() {
