@@ -3,6 +3,7 @@ package com.example.quartlemobile2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -46,6 +47,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 auth.signInWithEmailAndPassword(loginInput1.getText().toString(), loginInput2.getText().toString()).addOnCompleteListener(
                         task -> {
                             if(task.isSuccessful()){
+                                String id = auth.getCurrentUser().getUid();
+                                SharedPreferences sp = getSharedPreferences("sp",MODE_PRIVATE);
+                                sp.edit().putString("uid",id).apply();
                                 Intent dashboardIntent = new Intent(this, Dashboard.class);
                                 startActivity(dashboardIntent); 
                                 finish();
