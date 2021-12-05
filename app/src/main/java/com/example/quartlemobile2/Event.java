@@ -1,5 +1,7 @@
 package com.example.quartlemobile2;
 
+import androidx.annotation.NonNull;
+
 public class Event {
 
     private String attendants;
@@ -98,5 +100,10 @@ public class Event {
 
     public void setUser(String user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return name + "             "+ points + " points" +"\n\n"+ date;
     }
 }
