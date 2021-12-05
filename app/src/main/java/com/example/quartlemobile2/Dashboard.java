@@ -4,9 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +33,8 @@ public class Dashboard extends AppCompatActivity {
     private String id;
     private TextView prueba;
 
+    private ImageView scanBtn, homeBtn, rewardsBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,12 +42,30 @@ public class Dashboard extends AppCompatActivity {
         prueba = findViewById(R.id.prueba);
         db = FirebaseDatabase.getInstance();
 
+        scanBtn = findViewById(R.id.scBtn);
+        homeBtn = findViewById(R.id.dashBtn);
+        rewardsBtn = findViewById(R.id.reBtn);
 
         SharedPreferences sp = getSharedPreferences("sp",MODE_PRIVATE);
         id = sp.getString("uid","UserNotFound");
 
         loadDataBase();
 
+        scanBtn.setOnClickListener(
+                (v) -> {
+                    Intent scannerIntent = new Intent(this, Scanner.class);
+                    startActivity(scannerIntent);
+                    finish();
+                }
+        );
+
+        rewardsBtn.setOnClickListener(
+                (v) -> {
+                    Intent rewardsIntent = new Intent(this, Rewards.class);
+                    startActivity(rewardsIntent);
+                    finish();
+                }
+        );
 
     }
 
