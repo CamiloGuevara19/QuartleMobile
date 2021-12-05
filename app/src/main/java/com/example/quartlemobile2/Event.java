@@ -25,6 +25,9 @@ public class Event {
         this.user = user;
     }
 
+    public Event() {
+    }
+
     public String getAttendants() {
         return attendants;
     }

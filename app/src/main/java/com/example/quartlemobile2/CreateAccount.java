@@ -3,6 +3,7 @@ package com.example.quartlemobile2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -56,6 +57,8 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
                                     db.getReference().child(id).setValue(user).addOnCompleteListener(
                                            taskdb -> {
                                                if (taskdb.isSuccessful()){
+                                                   SharedPreferences sp = getSharedPreferences("sp",MODE_PRIVATE);
+                                                   sp.edit().putString("uid",id).apply();
                                                    Intent newDashBoardIntent = new Intent(this, Dashboard.class);
                                                    startActivity(newDashBoardIntent);
                                                    finish();
