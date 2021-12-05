@@ -18,8 +18,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+
+import java.lang.reflect.Array;
 
 public class Scanner extends AppCompatActivity implements View.OnClickListener {
 
@@ -31,6 +34,9 @@ public class Scanner extends AppCompatActivity implements View.OnClickListener {
 
     private String id;
 
+    private Event event;
+    private int newAttendance;
+
     private ImageView scanBtn, homeBtn, rewardsBtn;
 
     @Override
@@ -41,9 +47,9 @@ public class Scanner extends AppCompatActivity implements View.OnClickListener {
         auth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
 
-        scanBtn = findViewById(R.id.scBtn);
-        homeBtn = findViewById(R.id.dashBtn);
-        rewardsBtn = findViewById(R.id.reBtn);
+        scanBtn = findViewById(R.id.scBtn3);
+        homeBtn = findViewById(R.id.dashBtn3);
+        rewardsBtn = findViewById(R.id.reBtn3);
 
         scannerBtn = findViewById(R.id.scannerBtn);
         scannerResult = findViewById(R.id.scannerResult);
@@ -92,20 +98,49 @@ public class Scanner extends AppCompatActivity implements View.OnClickListener {
         if(result != null){
             if(result.getContents() == null){
                 Toast.makeText(this, "Lectura cancelada", Toast.LENGTH_SHORT).show();
-            }else{
-                Toast.makeText(this, result.getContents(), Toast.LENGTH_SHORT).show();
-
-
-                //makeEvent();
-
+            }else {
+                Toast.makeText(this, "resultado" + " " + result.getContents(), Toast.LENGTH_SHORT).show();
+                /*Gson gson = new Gson();
+                Event prueba = new Event();
+                prueba = gson.fromJson(result.getContents(), Event.class);*/
+                Log.e("result:", result.getContents());
+                makeEvent(result.getContents());
             }
         } else{
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
-    private void makeEvent(Event event){
-            DatabaseReference ref = db.getReference().child(id).child("eventsAttended").child(event.getName());
-            ref.setValue(event);
+    private void makeEvent(String refRoute){
+
+        String[] refArray = refRoute.split("/");
+        Log.e("0:", refArray[0]);
+        Log.e("1:", refArray[1]);
+        Log.e("2:", refArray[2]);
+
+        //Toast.makeText(this, " " + refArray[0] + refArray[1] + refArray[2], Toast.LENGTH_SHORT).show();
+
+        DatabaseReference setterRef = db.getReference().child(id).child("eventsAttended");
+        DatabaseReference ref = db.getReference().child(refArray[0]).child(refArray[1]).child(refArray[2]);
+        ref.addListenerForSingleValueEvent(
+                new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange( DataSnapshot data) {
+                        event = data.getValue(Event.class);
+                        //newAttendance = Integer.parseInt(event.getAttendants());
+                        Log.e("a", event.getAttendants());
+                    }
+                    @Override
+                    public void onCancelled( DatabaseError error) {
+
+                    }
+                });
+
+        //newAttendance++;
+        //event.setAttendants("" + newAttendance);
+        //setterRef.setValue(event);
+        //ref.setValue(event);
+
     }
 }

@@ -8,17 +8,17 @@ import android.content.SharedPreferences;
 import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
-<<<<<<< Updated upstream
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-=======
+
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
->>>>>>> Stashed changes
+
 
 
 import com.google.firebase.database.DataSnapshot;

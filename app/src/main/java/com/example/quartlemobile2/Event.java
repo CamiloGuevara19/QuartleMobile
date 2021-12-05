@@ -14,6 +14,9 @@ public class Event {
     private String purpose;
     private String user;
 
+    public Event() {
+    }
+
     public Event(String attendants, String capacity, String date, String goals,
                  String location, String name, String points, String purpose, String user) {
         this.attendants = attendants;
@@ -25,9 +28,6 @@ public class Event {
         this.points = points;
         this.purpose = purpose;
         this.user = user;
-    }
-
-    public Event() {
     }
 
     public String getAttendants() {
@@ -102,8 +102,4 @@ public class Event {
         this.user = user;
     }
 
-    @Override
-    public String toString() {
-        return name + "             "+ points + " points" +"\n\n"+ date;
-    }
 }
