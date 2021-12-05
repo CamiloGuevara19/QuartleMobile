@@ -2,6 +2,7 @@ package com.example.quartlemobile2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -52,6 +53,16 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
                                         "" + 0,
                                         registerInput1.getText().toString() + " " + registerInput2.getText().toString()
                                     );
+                                    db.getReference().child(id).setValue(user).addOnCompleteListener(
+                                           taskdb -> {
+                                               if (taskdb.isSuccessful()){
+                                                   Intent newDashBoardIntent = new Intent(this, Dashboard.class);
+                                                   startActivity(newDashBoardIntent);
+                                                   finish();
+                                               }
+                                           }
+                                    );
+
                                 }else{
                                     Toast.makeText(this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                 }
