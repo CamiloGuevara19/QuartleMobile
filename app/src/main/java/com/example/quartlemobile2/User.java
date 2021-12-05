@@ -8,6 +8,9 @@ public class User {
     private String points;
     private String username;
 
+    public User() {
+    }
+
     public User(String email, String myEvents, String points, String username) {
         this.email = email;
         this.myEvents = myEvents;
